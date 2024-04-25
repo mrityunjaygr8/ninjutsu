@@ -1,0 +1,22 @@
+### List Teams
+GET http://localhost:8000/api/teams/
+
+### Create Teams
+POST http://localhost:8000/api/teams/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "GoKage",
+    "member_ids": [
+        "9ff2d57a-837a-4de7-9dc1-6a97c071204d",
+        "b4145353-baf8-4e93-bee0-40d94c48adc6",
+        "23b5502c-f54e-48bb-a9dc-189ca796f813",
+        "42110e85-7596-4620-b60b-00418bfa0d6e",
+        "3fb28ca3-2789-422f-8bb0-e92d87634eb3"
+    ],
+    "leader_id": "42110e85-7596-4620-b60b-00418bfa0d6e"
+}
+
+
+### Delete Team
+DELETE http://localhost:8000/api/teams/e90f6f1a-da95-4929-9d23-eb5c70bf0527
