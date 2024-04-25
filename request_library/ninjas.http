@@ -5,7 +5,7 @@ GET http://localhost:8000/api/nin/
 GET http://localhost:8000/api/nin/?village_id=fb1db3a7-7f62-439e-bb65-cda9ac743bb8
 
 ### List Konoha Ninjas by village Name
-GET http://localhost:8000/api/nin/?village_name=Konohogakure
+GET http://localhost:8000/api/nin/?village_name=Konohagakure
 
 ### List Unaffiliated Ninjas
 GET http://localhost:8000/api/nin/?only_unaffiliated=true
@@ -15,6 +15,8 @@ POST http://localhost:8000/api/nin/
 Content-Type: application/json
 
 {
-    "village_id": "fb1db3a7-7f62-439e-bb65-cda9ac743bb8",
-    "name": "Kakashi Hatake"
+    "name": "Hidan"
 }
+
+### Delete Ninja
+DELETE http://localhost:8000/api/nin/5b563d60-abc2-43ea-817f-205f9d4eb9ed
