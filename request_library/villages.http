@@ -8,3 +8,8 @@ Content-Type: application/json
 {
     "name": "Iwakagure"
 }
+
+
+
+### Delete Village
+DELETE http://localhost:8000/api/villages/e5a2d8f3-7098-40bf-85b1-2a33950cce2f
