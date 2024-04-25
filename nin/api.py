@@ -1,6 +1,6 @@
 from typing import List
-from ninja import Router
-from .schema import NinCreateSchema, NinSchema
+from ninja import Router, Query
+from .schema import NinCreateSchema, NinSchema, NinFilterSchema
 from .models import Nin
 from villages.models import Village
 from ninja.pagination import paginate
@@ -12,8 +12,10 @@ nin_router = Router()
 
 @nin_router.get("/", response=List[NinSchema])
 @paginate(CustomPageNumberPagination)
-def get_nins(request):
-    return Nin.objects.all()
+def get_nins(request, filters: NinFilterSchema = Query(...)):
+    nins = Nin.objects.all()
+    nins = filters.filter(nins)
+    return nins
 
 
 @nin_router.post("/", response={201: NinSchema, 404: NotFoundError})
