@@ -1,17 +1,14 @@
-from ninja import Router
 from typing import List
 
-from ninjutsu.pagination import CustomPageNumberPagination
 
-from ninja.pagination import paginate
+from ninja.pagination import RouterPaginated
 from .schema import VillageSchema, VillageCreateSchema
 from .models import Village
 
-village_router = Router()
+village_router = RouterPaginated()
 
 
 @village_router.get("/", response=List[VillageSchema])
-@paginate(CustomPageNumberPagination)
 def get_villages(request):
     return Village.objects.all()
 

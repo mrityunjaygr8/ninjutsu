@@ -1,17 +1,16 @@
 from typing import List
-from ninja import Router, Query
+from ninja import  Query
 from .schema import NinCreateSchema, NinSchema, NinFilterSchema
 from .models import Nin
 from villages.models import Village
-from ninja.pagination import paginate
+from ninja.pagination import RouterPaginated
 from ninjutsu.pagination import CustomPageNumberPagination
 from ninjutsu.schema import NotFoundError
 
-nin_router = Router()
+nin_router = RouterPaginated()
 
 
 @nin_router.get("/", response=List[NinSchema])
-@paginate(CustomPageNumberPagination)
 def get_nins(request, filters: NinFilterSchema = Query(...)):
     nins = Nin.objects.all()
     nins = filters.filter(nins)

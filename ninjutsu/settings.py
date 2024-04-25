@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "villages",
     "nin",
+    "team"
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,4 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+NINJA_PAGINATION_CLASS="ninjutsu.pagination.CustomPageNumberPagination"
