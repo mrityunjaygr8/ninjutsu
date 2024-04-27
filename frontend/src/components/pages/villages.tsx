@@ -30,7 +30,6 @@ export default function Villages() {
     <>
       <h1>List Villages</h1>
       <Suspense fallback={"Loading..."}>
-        <pre>{JSON.stringify(villages.data, null, 2)}</pre>
         <Table columnData={columnData} dataFunction={dataFunction} />
       </Suspense>
     </>
