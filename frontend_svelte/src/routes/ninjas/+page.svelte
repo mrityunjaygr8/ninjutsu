@@ -1,5 +1,7 @@
 <script lang="ts">
+	import LinkButton from '$lib/components/built/link-button.svelte';
 	import Table from '$lib/components/built/table.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 	import useGetNinjas from '$lib/fetchers/useGetNinjas';
 	import type { Ninjas } from '$lib/types/ninjas';
 	import type { Paginated } from '$lib/types/paginated';
@@ -24,7 +26,10 @@
 		},
 		{
 			accessorKey: 'village.name',
-			cell: (info) => `${info.getValue()}-${info.row.original.village.id}`,
+			// cell: (info) => <LinkButton village={info.row.original.village} />,
+			cell: function (info) {
+				return <LinkButton village={info.row.original.village}></LinkButton>;
+			},
 			header: () => 'Village'
 		}
 	];
@@ -46,5 +51,6 @@
 {/if}
 
 {#if $query.status === 'success'}
+	<LinkButton village={$query.data.items[0].village} />
 	<Table {table} />
 {/if}
