@@ -3,4 +3,8 @@ interface Village {
     id: string
 }
 
-export type {Village}
+interface CreateVillageRequest {
+    name: string;
+  }
+
+export type {Village, CreateVillageRequest}

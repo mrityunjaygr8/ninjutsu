@@ -1,16 +1,19 @@
 import { Paginated } from "../types/paginated";
-import API_URL from "../utils/api";
 import type { Village } from "../types/village";
 
 import {createQuery} from "@tanstack/solid-query";
+import api from "../utils/api";
 
-export default function useGetVillages() {
+import type { State } from "../types/state";
+import { Accessor } from "solid-js";
+
+export default function useGetVillages(params: Accessor<State>) {
     return createQuery(() => ({
-      queryKey: ["villages"],
+      queryKey: ["villages", {...params()}],
       queryFn: async (): Promise<Paginated<Village>> => {
-        const response = await fetch(`${API_URL}/api/villages/`);
-        const data = await response.json();
-        return data;
+        return (await api.get("/api/villages/", {
+          params: params()
+        })).data;
       },
     }));
   }

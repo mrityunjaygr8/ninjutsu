@@ -2,7 +2,7 @@ import { Router } from "@solidjs/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { SolidQueryDevtools } from "@tanstack/solid-query-devtools";
 import routes from "./routes";
-import { css } from "../styled-system/css";
+import Nav from "./components/items/nav";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -13,15 +13,15 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SolidQueryDevtools />
-      <div id="main">
-        <div class={css({ fontSize: "2xl", fontWeight: "bold" })}>
-          <p>Woo WOo</p>
+    <div>
+      <QueryClientProvider client={queryClient}>
+        <SolidQueryDevtools />
+        <div class="md:container md:mx-auto">
+          <Nav />
+          <Router>{routes}</Router>
         </div>
-        <Router>{routes}</Router>
-      </div>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </div>
   );
 }
 
