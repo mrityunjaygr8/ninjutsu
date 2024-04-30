@@ -1,4 +1,4 @@
-import { For, Match, Switch, createEffect, createSignal } from "solid-js";
+import { For, Match, Switch } from "solid-js";
 import {
   createSolidTable,
   getCoreRowModel,
@@ -7,7 +7,6 @@ import {
 } from "@tanstack/solid-table";
 import { Paginated } from "../../types/paginated";
 import { CreateQueryResult } from "@tanstack/solid-query";
-import Pagination, { CreatePaginationButtonsProps } from "./pagination";
 
 export default function Table<T>({
   data,
@@ -15,7 +14,6 @@ export default function Table<T>({
 }: {
   data: CreateQueryResult<Paginated<T>, Error>;
   columnData: ColumnDef<T>[];
-  onPageChange: (e: number) => void;
 }) {
   const table = createSolidTable({
     columns: columnData,
