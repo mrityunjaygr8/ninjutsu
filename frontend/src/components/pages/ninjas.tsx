@@ -27,19 +27,11 @@ export default function Villages() {
     },
   ];
 
-  function dataFunction() {
-    if (ninjas.data !== undefined) {
-      return ninjas.data.items;
-    } else {
-      return [] as Ninja[];
-    }
-  }
-
   return (
     <>
       <h1 class="prose text-2xl font-bold text-gray-300 p-4">List Ninjas</h1>
       <Suspense fallback={"Loading..."}>
-        <Table columnData={columnData} dataFunction={dataFunction} />
+        <Table<Ninja> columnData={columnData} data={ninjas} />
       </Suspense>
     </>
   );
