@@ -1,6 +1,6 @@
 import useGetNinjas from "../../fetchers/useGetNinjas";
-import { Suspense } from "solid-js";
-import { ColumnDef } from "@tanstack/solid-table";
+import { JSXElement, Suspense } from "solid-js";
+import { CellContext, ColumnDef } from "@tanstack/solid-table";
 import type { Ninja } from "../../types/ninja";
 import Table from "../items/table";
 
@@ -17,11 +17,12 @@ export default function Villages() {
       header: "Name",
     },
     {
-      accessorKey: "village.id",
+      accessorKey: "village",
       header: "Village",
-      cell: (info) => (
+      cell: (info: CellContext<Ninja, unknown>): JSXElement => (
         <span>
-          <b>{info.getValue()}</b> - {info.row.original.village.name}
+          <b>{info.row.original.village.id}</b> -{" "}
+          {info.row.original.village.name}
         </span>
       ),
     },
