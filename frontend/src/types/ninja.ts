@@ -1,9 +1,15 @@
-import { Village } from "./village"
+import { Village, VillageID } from "./village";
 
 interface Ninja {
-    village: Village
-    id: string
-    name: string
+  village: Village;
+  id: string;
+  name: string;
+}
+interface CreateNinjaRequest {
+  name: string;
+  village_id: VillageID | null;
 }
 
-export type {Ninja}
+type NinjaID = string;
+
+export type { Ninja, CreateNinjaRequest, NinjaID };

@@ -1,10 +1,12 @@
 interface Village {
-    name: string
-    id: string
+  name: string;
+  id: string;
 }
 
 interface CreateVillageRequest {
-    name: string;
-  }
+  name: string;
+}
 
-export type {Village, CreateVillageRequest}
+type VillageID = string;
+
+export type { Village, CreateVillageRequest, VillageID };

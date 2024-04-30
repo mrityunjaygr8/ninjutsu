@@ -30,7 +30,7 @@ export default function CreateVillage(params: CreateVillageProps) {
           <input
             type="submit"
             class="daisy-btn daisy-btn-primary rounded-none daisy-btn-sm"
-            value="Create Ninja"
+            value="Create Village"
           />
           <input
             type="reset"

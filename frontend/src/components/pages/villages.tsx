@@ -11,7 +11,7 @@ import { useQueryClient } from "@tanstack/solid-query";
 import { State } from "../../types/state";
 import Pagination, { CreatePaginationButtonsProps } from "../items/pagination";
 
-const CREATE_VILLAGE_MODAL = `modal-${guidGenerator()}`;
+const CREATE_VILLAGE_MODAL = `village-modal-${guidGenerator()}`;
 
 export default function Villages() {
   const [params, setParams] = createSignal<State>({
