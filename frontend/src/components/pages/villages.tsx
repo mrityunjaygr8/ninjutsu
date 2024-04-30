@@ -1,5 +1,5 @@
 import useGetVillages from "../../fetchers/useGetVillages";
-import { Match, Switch, createSignal } from "solid-js";
+import { Match, Switch, createEffect, createSignal } from "solid-js";
 import { ColumnDef } from "@tanstack/solid-table";
 import type { Village } from "../../types/village";
 import Table from "../items/table";
@@ -9,6 +9,7 @@ import CreateVillage from "../items/village/create_village";
 import useCreateVillage from "../../fetchers/useCreateVillage";
 import { useQueryClient } from "@tanstack/solid-query";
 import { State } from "../../types/state";
+import Pagination, { CreatePaginationButtonsProps } from "../items/pagination";
 
 const CREATE_VILLAGE_MODAL = `modal-${guidGenerator()}`;
 
@@ -30,6 +31,14 @@ export default function Villages() {
       header: "Name",
     },
   ];
+  const [pageSignal, setPageSignal] =
+    createSignal<CreatePaginationButtonsProps>({ page: 0, page_count: 0 });
+  createEffect(() => {
+    setPageSignal({
+      page: villages.data?.page!,
+      page_count: villages.data?.page_count!,
+    });
+  });
 
   const queryClient = useQueryClient();
   const createVillageMutation = useCreateVillage(queryClient);
@@ -58,12 +67,12 @@ export default function Villages() {
         <Match when={villages.isLoading}>Loading...</Match>
         <Match when={villages.isError}>Error: {villages.error?.message}</Match>
         <Match when={villages.isSuccess}>
-          <Table<Village>
-            columnData={columnData}
-            data={villages}
+          <Table<Village> columnData={columnData} data={villages} />
+          <Pagination
             onPageChange={(e: number) => {
               setParams({ ...params(), page: e });
             }}
+            page={pageSignal}
           />
         </Match>
       </Switch>
@@ -75,7 +84,7 @@ export default function Villages() {
             formReset={() =>
               (
                 document.getElementById(
-                  CREATE_VILLAGE_MODAL
+                  CREATE_VILLAGE_MODAL,
                 ) as HTMLDialogElement
               ).close()
             }
@@ -84,7 +93,7 @@ export default function Villages() {
               createVillageMutation.mutate(formData());
               (e.target as HTMLFormElement).reset();
               const modal = document.getElementById(
-                CREATE_VILLAGE_MODAL
+                CREATE_VILLAGE_MODAL,
               ) as HTMLDialogElement;
               modal.close();
             }}
