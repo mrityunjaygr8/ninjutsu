@@ -37,7 +37,7 @@ export default function Villages() {
 
   return (
     <>
-      <h1>List Villages</h1>
+      <h1 class="prose text-2xl font-bold text-gray-300 p-4">List Ninjas</h1>
       <Suspense fallback={"Loading..."}>
         <Table columnData={columnData} dataFunction={dataFunction} />
       </Suspense>

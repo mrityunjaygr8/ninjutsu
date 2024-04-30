@@ -1,6 +1,6 @@
 export default function Nav() {
   return (
-    <div class="daisy-navbar bg-base-100">
+    <div class="daisy-navbar bg-base-100 p-3">
       <div class="flex-1">
         <a href="/">Ninja Stuff</a>
       </div>

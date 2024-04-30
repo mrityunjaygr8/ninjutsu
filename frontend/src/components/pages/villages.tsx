@@ -50,7 +50,9 @@ export default function Villages() {
   return (
     <>
       <div class="flex justify-between">
-        <h1 class="prose text-2xl font-bold text-gray-300">List Villages</h1>
+        <h1 class="prose text-2xl font-bold text-gray-300 p-4">
+          List Villages
+        </h1>
         <button
           class="daisy-btn daisy-btn-primary daisy-btn-sm rounded-none"
           onClick={() =>
