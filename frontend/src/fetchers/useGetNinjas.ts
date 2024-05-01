@@ -8,7 +8,7 @@ import type { State } from "../types/state";
 
 export default function useGetNinjas(params: Accessor<State>) {
   return createQuery(() => ({
-    queryKey: ["ninjas", params],
+    queryKey: ["ninjas", params()],
     queryFn: async (): Promise<Paginated<Ninja>> => {
       return (await api.get("/api/nin/", { params: params() })).data;
     },

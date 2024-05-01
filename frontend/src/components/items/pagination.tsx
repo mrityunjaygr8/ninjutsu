@@ -2,7 +2,14 @@ import {
   RiArrowsArrowLeftDoubleFill,
   RiArrowsArrowRightDoubleFill,
 } from "solid-icons/ri";
-import { Accessor, For, JSX, createEffect, createSignal } from "solid-js";
+import {
+  Accessor,
+  For,
+  JSX,
+  createEffect,
+  createSignal,
+  mergeProps,
+} from "solid-js";
 
 const VISIBLE_EXTRA_PAGES = 2;
 
@@ -98,9 +105,11 @@ export type {
 export default function Pagination({
   onPageChange,
   page,
+  size,
 }: {
   onPageChange: (e: number) => void;
   page: Accessor<CreatePaginationButtonsProps>;
+  size: "xs" | "md" | "lg" | "sm";
 }) {
   const [paginationData, setPaginationData] =
     createSignal<CreatePaginationButtonsResponse>({ items: [] });
@@ -118,7 +127,7 @@ export default function Pagination({
         {(item: PaginationButtonData, i: Accessor<number>) => {
           return (
             <button
-              class="daisy=join-item daisy-btn "
+              class={`daisy-join-item daisy-btn daisy-btn-${size}`}
               classList={{
                 "daisy-btn-active": item.active,
                 "rounded-r-sm": i() === 0,

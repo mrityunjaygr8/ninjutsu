@@ -59,6 +59,7 @@ export default function Villages() {
       page_count: ninjas.data?.page_count!,
     });
   });
+
   const queryClient = useQueryClient();
   const createNinjaMutation = useCreateNinja(queryClient);
 
@@ -85,6 +86,7 @@ export default function Villages() {
             setParams({ ...params(), page: e });
           }}
           page={pageSignal}
+          size="md"
         />
       </Suspense>
       <dialog id={CREATE_NINJA_MODAL} class="daisy-modal">

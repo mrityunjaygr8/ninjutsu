@@ -74,6 +74,7 @@ export default function Villages() {
             onPageChange={(e: number) => {
               setParams({ ...params(), page: e });
             }}
+            size="md"
             page={pageSignal}
           />
         </Match>
