@@ -1,6 +1,6 @@
 import useGetNinjas from "../../fetchers/useGetNinjas";
 import useCreateNinja from "../../fetchers/useCreateNinja";
-import { JSXElement, Suspense, createSignal } from "solid-js";
+import { JSXElement, Suspense, createEffect, createSignal } from "solid-js";
 import { CellContext, ColumnDef } from "@tanstack/solid-table";
 import type { CreateNinjaRequest, Ninja } from "../../types/ninja";
 import Table from "../items/table";
@@ -8,11 +8,17 @@ import { FaSolidPlus } from "solid-icons/fa";
 import guidGenerator from "../../utils/id";
 import CreateNinja from "../items/ninja/create_ninja";
 import { useQueryClient } from "@tanstack/solid-query";
+import type { State } from "../../types/state";
+import Pagination, { CreatePaginationButtonsProps } from "../items/pagination";
 
 export default function Villages() {
   const CREATE_NINJA_MODAL = `ninja-modal-${guidGenerator()}`;
-  const ninjas = useGetNinjas();
+  const [params, setParams] = createSignal<State>({
+    page: 1,
+    page_size: 10,
+  });
 
+  const ninjas = useGetNinjas(params);
   const [formData, setFormData] = createSignal<CreateNinjaRequest>({
     name: "",
     village_id: null,
@@ -45,6 +51,14 @@ export default function Villages() {
       },
     },
   ];
+  const [pageSignal, setPageSignal] =
+    createSignal<CreatePaginationButtonsProps>({ page: 0, page_count: 0 });
+  createEffect(() => {
+    setPageSignal({
+      page: ninjas.data?.page!,
+      page_count: ninjas.data?.page_count!,
+    });
+  });
   const queryClient = useQueryClient();
   const createNinjaMutation = useCreateNinja(queryClient);
 
@@ -66,6 +80,12 @@ export default function Villages() {
       </div>
       <Suspense fallback={"Loading..."}>
         <Table<Ninja> columnData={columnData} data={ninjas} />
+        <Pagination
+          onPageChange={(e: number) => {
+            setParams({ ...params(), page: e });
+          }}
+          page={pageSignal}
+        />
       </Suspense>
       <dialog id={CREATE_NINJA_MODAL} class="daisy-modal">
         <div class="daisy-modal-box">
